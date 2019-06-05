@@ -11,7 +11,7 @@ Project aims:
 - program different methods, which can be called to show the light shows
 - program Tetris, which can be played through my website
 - program a Raspberry/ESP-32 as server to control the Devices
-    * Try to implement an API to let the website add and remove different devices (Maybe I should implement a Database
+    * Try to implement an API to let the website add and remove different devices (Maybe I should implement a Database, which could also improve my lack of knowledge in programing them)
     * Send sensor data to the website such as temperature or humidity
 - program the website to show and control the devices
     * program a good looking website
