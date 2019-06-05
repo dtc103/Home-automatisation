@@ -17,5 +17,5 @@ Project aims:
     * program a good looking website
     * Implement an API to add more devices to my server
 
-- (Optional) program a mobile App to control my devices(to get in contact with android studio or javascript libraries for mobile phone websites)
+- (Optional) program a mobile App to control my devices (to get in contact with android studio or javascript libraries for mobile phone websites)
     * (Optional) implement a bluetooth connection into the app to control the LED-matrix
