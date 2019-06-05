@@ -3,7 +3,7 @@ Long ago I asked myself what bigger projects I could possibly do with my Raspber
 I thought it would be nice to link them somehow together.
 So I decided to make a little home-automatisation.
 
-The reason behind this project ist that I dont know a lot about website programming and javascript, but a lot more about server programming with C/C++, Java or Rust. To improve my knowledge about my weakenings, I'm planning to to operate 
+The reason behind this project ist that I dont know a lot about website programming and javascript, but a lot more about server programming with C/C++, Java or Rust. To improve my knowledge in web development, I was planing to operate 
 these devices through an web interface. 
 
 Project aims:
