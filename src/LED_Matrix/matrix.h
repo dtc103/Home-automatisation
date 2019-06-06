@@ -38,23 +38,19 @@ Matrix<T>::Matrix(unsigned int x, unsigned int y) : x_length{x}, y_length{y}
     }
 }
 
-//TODO delete unused values
 template <typename T>
 void Matrix<T>::set_size(unsigned int x, unsigned int y)
 {
-    T **tmp_matrix = matrix;
-    matrix = new T *[x];
-
-    unsigned int i = 0;
-    unsigned int p = 0;
-    for (i = 0; i < x; ++i)
+    for (unsigned int i = x_length - 1; i >= x; --i)
     {
-        matrix[i] = tmp_matrix[i];
-        for (p = 0; p < y; ++p)
-        {
-            matrix[i][p] = tmp_matrix[i][p];
-        }
+        delete matrix[i];
     }
+
+    for (unsigned int i = 0; i < x_length; ++i)
+    {
+        T *tmp = new T[y]();
+    }
+
     x_length = x;
     y_length = y;
 }
