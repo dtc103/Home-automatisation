@@ -2,7 +2,6 @@
 #define SNAKE_H
 
 #include "Arduino.h"
-#include "NeoPixelLibrary"
 #include "../LED_Matrix/matrix.h"
 
 volatile int direction = 0;
