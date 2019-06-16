@@ -8,21 +8,23 @@ class Matrix
 {
 public:
     Matrix();
-    Matrix(unsigned int, unsigned int);
+    Matrix(size_t, size_t);
 
-    void set_size(unsigned int, unsigned int);
-    unsigned int get_x_length();
-    unsigned int get_y_length();
+    void set_size(size_t, size_t);
+    size_t get_x_length() const;
+    size_t get_y_length() const;
 
-    T &get_value(unsigned int, unsigned int);
-    T *get_pointer_to_value(unsigned int, unsigned int);
-    void set_value(T, unsigned int, unsigned int);
+    void fill(T);
 
-    T *operator[](unsigned int index);
+    T &get_value(size_t, size_t) const;
+    T *get_pointer_to_value(size_t, size_t) const;
+    void set_value(T, size_t, size_t);
+
+    T *operator[](size_t) const;
 
 private:
-    unsigned int y_length;
-    unsigned int x_length;
+    size_t y_length;
+    size_t x_length;
 
     T **matrix;
 };
@@ -33,35 +35,37 @@ Matrix<T>::Matrix() : Matrix(0, 0)
 }
 
 template <typename T>
-Matrix<T>::Matrix(unsigned int x, unsigned int y) : x_length{x}, y_length{y}
+Matrix<T>::Matrix(size_t x, size_t y) : x_length{x}, y_length{y}
 {
     matrix = new T *[x_length];
-    for (unsigned int i = 0; i < x_length; ++i)
+    for (size_t i = 0; i < x_length; ++i)
     {
         matrix[i] = new T[y_length](); //the "()" intitalizes the fields with default values
     }
 }
 
 template <typename T>
-void Matrix<T>::set_size(unsigned int x, unsigned int y)
+void Matrix<T>::set_size(size_t x, size_t y)
 {
-	if (x < x_length) {
-		for (unsigned int i = x_length - 1; i >= x; --i)
-		{
-			delete[] matrix[i];
-		}
-		T** tmp = new T * [x];
-		for (unsigned int i = 0; i < x; ++i) {
-			tmp[i] = matrix[i];
-		}
-		delete[] matrix;
-		matrix = tmp;
-		tmp = nullptr; //i dont really have to take this step because the variable will be dropped after this block anyway
-	}
+    if (x < x_length)
+    {
+        for (size_t i = x_length - 1; i >= x; --i)
+        {
+            delete[] matrix[i];
+        }
+        T **tmp = new T *[x];
+        for (size_t i = 0; i < x; ++i)
+        {
+            tmp[i] = matrix[i];
+        }
+        delete[] matrix;
+        matrix = tmp;
+        tmp = nullptr; //i dont really have to take this step because the variable will be dropped after this block anyway
+    }
     if (x > x_length)
     {
         T **tmp = new T *[x];
-        for (unsigned int i = 0; i < x; ++i)
+        for (size_t i = 0; i < x; ++i)
         {
             if (i < x_length)
             {
@@ -72,42 +76,54 @@ void Matrix<T>::set_size(unsigned int x, unsigned int y)
                 tmp[i] = new T[y]();
             }
         }
-		delete[] matrix;
+        delete[] matrix;
         matrix = tmp;
     }
     x_length = x;
 
     if (y_length != y)
     {
-        for (unsigned int i = 0; i < x_length; ++i)
+        for (size_t i = 0; i < x_length; ++i)
         {
             T *tmp = new T[y]();
-            unsigned int loopvariable = (y > y_length) ? y_length : y;
-            for (unsigned int p = 0; p < loopvariable; ++p)
+            size_t loopvariable = (y > y_length) ? y_length : y;
+            for (size_t p = 0; p < loopvariable; ++p)
             {
                 tmp[p] = matrix[i][p];
             }
             delete[] matrix[i];
             matrix[i] = tmp;
+            tmp = nullptr;
         }
     }
     y_length = y;
 }
 
 template <typename T>
-unsigned int Matrix<T>::get_x_length()
+size_t Matrix<T>::get_x_length() const
 {
     return x_length;
 }
 
 template <typename T>
-unsigned int Matrix<T>::get_y_length()
+size_t Matrix<T>::get_y_length() const
 {
     return y_length;
 }
 
+void Matrix<T>::fill(T value)
+{
+    for (size_t i = 0; i < x_length; ++i)
+    {
+        for (size_t j = 0; j < y_length; ++j)
+        {
+            matrix[i][j] = value;
+        }
+    }
+}
+
 template <typename T>
-T &Matrix<T>::get_value(unsigned int x, unsigned int y)
+T &Matrix<T>::get_value(size_t x, size_t y) const
 {
     /*
     i wont do this check because i will ensure as a programmer not to set the values < length
@@ -120,13 +136,13 @@ T &Matrix<T>::get_value(unsigned int x, unsigned int y)
 }
 
 template <typename T>
-T *Matrix<T>::get_pointer_to_value(unsigned int x, unsigned int y)
+T *Matrix<T>::get_pointer_to_value(size_t x, size_t y) const
 {
     return &matrix[x][y];
 }
 
 template <typename T>
-void Matrix<T>::set_value(T val, unsigned int x, unsigned int y)
+void Matrix<T>::set_value(T val, size_t x, size_t y)
 {
     /*
     i wont do this check because i will ensure as a programmer not to set the values < length
@@ -139,19 +155,20 @@ void Matrix<T>::set_value(T val, unsigned int x, unsigned int y)
 }
 
 template <typename T>
-T *Matrix<T>::operator[](unsigned int index)
+T *Matrix<T>::operator[](size_t index) const
 {
     return matrix[index];
 }
 
+#ifdef DEBUG_ON_PC
 template <typename T>
 std::ostream &operator<<(std::ostream &os, Matrix<T> m)
 {
     os << "[";
-    for (unsigned int i = 0; i < m.get_y_length() - 1; ++i)
+    for (size_t i = 0; i < m.get_y_length() - 1; ++i)
     {
         os << "\t[";
-        for (unsigned int p = 0; p < m.get_x_length() - 1; ++p)
+        for (size_t p = 0; p < m.get_x_length() - 1; ++p)
         {
             os << m.get_value(p, i) << ", ";
         }
@@ -159,7 +176,7 @@ std::ostream &operator<<(std::ostream &os, Matrix<T> m)
         os << "],\n";
     }
     os << "\t[";
-    for (unsigned int p = 0; p < m.get_x_length() - 1; ++p)
+    for (size_t p = 0; p < m.get_x_length() - 1; ++p)
     {
         os << m.get_value(p, m.get_y_length() - 1) << ", ";
     }
@@ -169,4 +186,6 @@ std::ostream &operator<<(std::ostream &os, Matrix<T> m)
 
     return os;
 }
+#endif
+
 #endif
