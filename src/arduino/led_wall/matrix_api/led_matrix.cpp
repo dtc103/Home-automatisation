@@ -1,10 +1,12 @@
-#include "led_matrix.h"
+#include "matrix_api.h"
 
-LED_Matrix::LED_Matrix(Adafruit_NeoPixel matrix, INPUT_LAYOUT layout, size_t x, size_t y)
+matrix_api::matrix_api(int data_pin, INPUT_LAYOUT layout, size_t x, size_t y)
     : led_matrix{matrix}, x_length{x}, y_length{y}
 {
-    led_matrix.begin();
-    led_matrix.show(); //intitialize all pixels to "off"
+    led_matrix = new Adafruit_NeoPixel(x * y, data_pin, NEO_GRB + NEO_KHZ800);
+
+    led_matrix->begin();
+    led_matrix->show(); //intitialize all pixels to "off"
 
     switch (layout)
     {
@@ -164,12 +166,12 @@ LED_Matrix::LED_Matrix(Adafruit_NeoPixel matrix, INPUT_LAYOUT layout, size_t x, 
     }
 }
 
-void LED_Matrix::set_color(size_t x, size_t y, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0)
+void matrix_api::set_color(size_t x, size_t y, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0)
 {
     led_matrix.setPixelColor(matrix[x][y], red, green, blue);
 }
 
-void LED_Matrix::set_color(size_t x, size_t y, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0, unsigned int white = 0)
+void matrix_api::set_color(size_t x, size_t y, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0, unsigned int white = 0)
 {
     led_matrix.setPixelColor(matrix[x][y], red, green, blue, white);
 }
