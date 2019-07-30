@@ -23,5 +23,3 @@ private:
 };
 
 #endif
-
-//i have to map the matrix to the individual leds from the led strip
