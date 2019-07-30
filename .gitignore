@@ -1,3 +1,4 @@
 *.vscode
 /.vscode
 /src/.vscode
+/src/arduino/.vscode
