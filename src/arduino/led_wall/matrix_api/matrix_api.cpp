@@ -48,3 +48,8 @@ void matrix_api::set_color(size_t x, size_t y, unsigned int red = 0, unsigned in
 {
     led_matrix.setPixelColor(matrix[x][y], red, green, blue, white);
 }
+
+void matrix_api::render()
+{
+    led_matrix->show();
+}
