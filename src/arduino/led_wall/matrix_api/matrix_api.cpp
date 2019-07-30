@@ -41,12 +41,12 @@ matrix_api::matrix_api(int data_pin, size_t x, size_t y)
 
 void matrix_api::set_color(size_t x, size_t y, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0)
 {
-    led_matrix.setPixelColor(matrix[x][y], red, green, blue);
+    led_matrix->setPixelColor(matrix[x][y], red, green, blue);
 }
 
 void matrix_api::set_color(size_t x, size_t y, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0, unsigned int white = 0)
 {
-    led_matrix.setPixelColor(matrix[x][y], red, green, blue, white);
+    led_matrix->setPixelColor(matrix[x][y], red, green, blue, white);
 }
 
 void matrix_api::render()
