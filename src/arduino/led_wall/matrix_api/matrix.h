@@ -1,8 +1,6 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include <iostream>
-
 template <typename T>
 class Matrix
 {
@@ -161,6 +159,9 @@ T *Matrix<T>::operator[](size_t index) const
 }
 
 #ifdef DEBUG_ON_PC
+
+#include <iostream>
+
 template <typename T>
 std::ostream &operator<<(std::ostream &os, Matrix<T> m)
 {
