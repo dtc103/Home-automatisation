@@ -13,6 +13,9 @@ public:
     void set_color(size_t, size_t, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0);
     void set_color(size_t, size_t, unsigned int red = 0, unsigned int green = 0, unsigned int blue = 0, unsigned int white = 0);
 
+    size_t get_x_length() const;
+    size_t get_y_length() const;
+
     void render();
 
 private:

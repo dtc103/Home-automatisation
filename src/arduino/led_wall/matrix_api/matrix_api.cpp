@@ -49,7 +49,20 @@ void matrix_api::set_color(size_t x, size_t y, unsigned int red = 0, unsigned in
     led_matrix->setPixelColor(matrix[x][y], red, green, blue, white);
 }
 
-void matrix_api::render()
+size_t matrix_api::get_x_length() const
+{
+    return matrix->get_x_length();
+}
+
+size_t matrix_api::get_y_length() const
+{
+    return matrix->get_y_length();
+}
+
+void
+
+    void
+    matrix_api::render()
 {
     led_matrix->show();
 }
