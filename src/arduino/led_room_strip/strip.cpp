@@ -22,6 +22,10 @@ void strip::set_brightness(unsigned int bright){
     _strip.setBrightness(bright);
 }
 
+unsigned int strip::get_brightness() const{
+    return this->_strip.getBrightness();
+}
+
 void strip::set_led_HSV(unsigned int n, unsigned int hue, unsigned int sat, unsigned int val){
     _strip.setPixelColor(n, _strip.gamma32(_strip.ColorHSV(hue, sat, val)));
 }
