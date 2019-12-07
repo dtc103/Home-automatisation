@@ -3,8 +3,8 @@
 matrix_api::matrix_api(int data_pin, size_t x, size_t y)
     : x_length{x}, y_length{y}
 {
-    matrix = new Matrix<unsigned int>(x_length, y_length);
-    led_matrix = new Adafruit_NeoPixel(x * y, data_pin, NEO_GRB + NEO_KHZ800);
+    matrix = Matrix<unsigned int>(x_length, y_length);
+    led_matrix = Adafruit_NeoPixel(x * y, data_pin, NEO_GRB + NEO_KHZ800);
 
     led_matrix->begin();
     led_matrix->show(); //intitialize all pixels to "off"
@@ -59,10 +59,7 @@ size_t matrix_api::get_y_length() const
     return matrix->get_y_length();
 }
 
-void
-
-    void
-    matrix_api::render()
+void matrix_api::render()
 {
     led_matrix->show();
 }

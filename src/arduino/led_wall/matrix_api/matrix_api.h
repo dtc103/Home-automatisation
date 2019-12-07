@@ -19,8 +19,8 @@ public:
     void render();
 
 private:
-    Matrix<unsigned int> *matrix;
-    Adafruit_NeoPixel *led_matrix;
+    Matrix<unsigned int> matrix;
+    Adafruit_NeoPixel led_matrix;
     size_t x_length;
     size_t y_length;
 };

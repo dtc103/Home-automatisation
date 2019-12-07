@@ -1,0 +1,12 @@
+C:\Users\jan_k\programing\Home-automatisation\src\webserver\backend\target\debug\deps\cc-fba6e4e1eead5148.rmeta: C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\lib.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\registry.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\winapi.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\com.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\setup_config.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\windows_registry.rs
+
+C:\Users\jan_k\programing\Home-automatisation\src\webserver\backend\target\debug\deps\libcc-fba6e4e1eead5148.rlib: C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\lib.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\registry.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\winapi.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\com.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\setup_config.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\windows_registry.rs
+
+C:\Users\jan_k\programing\Home-automatisation\src\webserver\backend\target\debug\deps\cc-fba6e4e1eead5148.d: C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\lib.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\registry.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\winapi.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\com.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\setup_config.rs C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\windows_registry.rs
+
+C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\lib.rs:
+C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\registry.rs:
+C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\winapi.rs:
+C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\com.rs:
+C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\setup_config.rs:
+C:\Users\jan_k\.cargo\registry\src\github.com-1ecc6299db9ec823\cc-1.0.48\src\windows_registry.rs:
