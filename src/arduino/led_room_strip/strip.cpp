@@ -7,7 +7,7 @@ strip::strip(unsigned int data_pin, unsigned int led_count) : _data_pin{data_pin
 }
 
 strip::~strip(){
-    strip.clear();
+    _strip.clear();
 }
 
 void strip::set_led(unsigned int n, unsigned int r, unsigned int g, unsigned int b){

@@ -25,8 +25,8 @@ public:
      * @param b rgb blue value
      */
     static void fill(strip& _strip, unsigned int r, unsigned int g, unsigned int b){
-        for(size_t i = 0; i < _strip->get_led_count(); ++i)){
-            _strip->set_led(i, r, g, b);
+        for(size_t i = 0; i < _strip.get_led_count(); ++i){
+            _strip.set_led(i, r, g, b);
         }
         _strip.render();
     }
@@ -41,8 +41,8 @@ public:
      * @param brightness strip brigntess
      */
     static void fill(strip& _strip, unsigned int r, unsigned int g, unsigned int b, unsigned int white){
-        for(size_t i = 0; i < _strip->get_led_count(); ++i)){
-            _strip->set_led(i, r, g, b, white);
+        for(size_t i = 0; i < _strip.get_led_count(); ++i){
+            _strip.set_led(i, r, g, b, white);
         }
         _strip.render();
     }
@@ -107,7 +107,7 @@ public:
                     starttime = millis();
 
                     for(unsigned int led = 0; led < _strip.get_led_count(); ++led){
-                        _strip.set_led_HSV(brightness, MAX, i); //TODO get maximal hsv value and saturation value
+                        _strip.set_led_HSV(led, brightness, MAX, i); //TODO get maximal hsv value and saturation value
                     }
                     _strip.render();
                 }
@@ -153,7 +153,7 @@ public:
         brightness = (brightness > 255) ? 255 : brightness;
         unsigned int flameflicker = random(75); //TODO has to be changed later maybe
 
-        //TODO switch between orange and red
+        //TODO switch between orange and red and yellow
         while(!interrupt_effects()){
 
         }
@@ -182,11 +182,11 @@ public:
 
     static void storm(strip& _strip, Stormtype stormtype){
         switch(stormtype){
-            Stormtype::THUNDERSTORM:
+            case Stormtype::THUNDERSTORM:
                 break;
-            Stormtype::BLIZZARD:
+            case Stormtype::BLIZZARD:
                 break;
-            Stormtype::SANDSTORM:
+            case Stormtype::SANDSTORM:
                 break;
         }
     }
@@ -195,4 +195,4 @@ private:
     static uint32_t daytime_to_color(unsigned byte daytime){
         
     }
-}
+};

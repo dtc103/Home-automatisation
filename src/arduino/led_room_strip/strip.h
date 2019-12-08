@@ -14,7 +14,7 @@ public:
     void set_led(unsigned int, unsigned int, unsigned int, unsigned int);
     void set_led(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
-    void set_led_HSV(unsigned int, unsigned int, unsigned int); //with gamma correction
+    void set_led_HSV(unsigned int n, unsigned int h, unsigned int s, unsigned int v); //with gamma correction
 
     void set_brightness(unsigned int);
     unsigned int get_brightness() const;
