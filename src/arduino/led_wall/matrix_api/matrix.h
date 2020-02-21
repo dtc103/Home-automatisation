@@ -109,6 +109,7 @@ size_t Matrix<T>::get_y_length() const
     return y_length;
 }
 
+template <typename T>
 void Matrix<T>::fill(T value)
 {
     for (size_t i = 0; i < x_length; ++i)
