@@ -18,7 +18,7 @@ void Color_Effects::strobe(unsigned int red, unsigned int green, unsigned int bl
     bool lights_on = false;
     this->led_pane.clear();
     this->led_pane.render();
-    while (!this->interrupt_effect())
+    while ()
     {
         if (millis() - start_time > random(5, max_strobe_time))
         {
@@ -34,14 +34,4 @@ void Color_Effects::strobe(unsigned int red, unsigned int green, unsigned int bl
             }
         }
     }
-}
-
-bool Color_Effects::interrupt_effect()
-{
-    //check if interrupt happened, when yes, stop effect
-    //Idea: if there are queries to stop the effect from the website or tranceiver, change the pin voltage from
-    //one pin to HIGH. The interrupt effect function will always check the state of this pin and if its
-    //HIGH it stops teh effect, otherwise it goes one
-
-    return (bool)digitalRead(this->interrupt_pin);
 }

@@ -10,5 +10,4 @@ public:
 private:
     Matrix_api led_pane;
     uint8_t interrupt_pin; //pin, which will be listened to, to interrupt the effects
-    bool interrupt_effect();
 };
