@@ -13,6 +13,7 @@ void Color_Effects::fill(Matrix_api &led_pane, unsigned int red, unsigned int gr
     led_pane.render();
 }
 
+//FIXME: strobe stops after a certain amount of time
 void Color_Effects::strobe(Matrix_api &led_pane, unsigned int red, unsigned int green, unsigned int blue, unsigned int max_brightness, unsigned int max_strobe_time)
 {
     int start_time = millis();
