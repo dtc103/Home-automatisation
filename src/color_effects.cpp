@@ -44,7 +44,6 @@ void Color_Effects::strobe(Matrix_api &led_pane, unsigned int red, unsigned int 
 }
 
 //TODO: delay ersetzen durch millis
-//TODO: für beliebig lange strecke implementieren
 void Color_Effects::rainbow_lane(Matrix_api &led_pane, unsigned int lane_length = 1, unsigned int velocity = 100)
 {
     const unsigned int max_hue = 65535;
@@ -63,29 +62,25 @@ void Color_Effects::rainbow_lane(Matrix_api &led_pane, unsigned int lane_length 
             //calculate x and y pos of the individual lights
             unsigned int x_pos = 0;
             unsigned int y_pos = 0;
+            unsigned int y_shift = 0; //y_shift calculates the distance from the curr led y-pos to the first led y_pos
             if (left)
             {
+                
                 for (int x = 0; x < led_pane.get_x_length(); ++x)
                 {
                     for (int curr = led_pane.get_x_length() - 1 - x; curr < led_pane.get_x_length() - 1 - x + lane_length; ++curr)
                     {
-                        if (curr >= led_pane.get_x_length())
+                        y_shift = (x + curr) / led_pane.get_x_length();
+                        //calculate y_pos
+                        y_pos = (y - y_shift) % led_pane.get_y_length();
+                        //calculate x_pos
+                        if (y_shift % 2 == 0)
                         {
-                            if (y - 1 < 0)
-                            {
-                                x_pos = led_pane.get_x_length() - (curr - led_pane.get_x_length()) - 1;
-                                y_pos = led_pane.get_y_length() - 1;
-                            }
-                            else
-                            {
-                                x_pos = led_pane.get_x_length() - (curr - led_pane.get_x_length()) - 1;
-                                y_pos = y - 1;
-                            }
+                            x_pos = (x + curr) % led_pane.get_x_length(); 
                         }
                         else
                         {
-                            x_pos = curr;
-                            y_pos = y;
+                            x_pos = (led_pane.get_x_length() - 1) - ((x + curr) % led_pane.get_x_length());
                         }
                         led_pane.set_color_HSV(x_pos, y_pos, led_pane.get_matrix()->get_value(x_pos, y_pos) * interpolation_part, 255, 255);
                     }
@@ -102,23 +97,15 @@ void Color_Effects::rainbow_lane(Matrix_api &led_pane, unsigned int lane_length 
                     //if lane_length isnt converted to int, the solution from x-lane_length will be unsigned and therefore never smaller than 0
                     for (int curr = x; curr > x - (int)lane_length; --curr)
                     {
-                        if (curr < 0)
+                        y_shift = ((x - curr) - (led_pane.get_x_length() - 1)));
+                        y_pos = (y - y_shift) % led_pane.get_y_length();
+                        if (y_shift % 2 == 0)
                         {
-                            if (y - 1 < 0)
-                            {
-                                x_pos = -curr - 1;
-                                y_pos = led_pane.get_y_length() - 1;
-                            }
-                            else
-                            {
-                                x_pos = -curr - 1;
-                                y_pos = y - 1;
-                            }
+                            x_pos = (x - curr) % led_pane.get_x_length();
                         }
                         else
                         {
-                            x_pos = curr;
-                            y_pos = y;
+                            x_pos = (led_pane.get_x_length() - 1) - (x - curr) % led_pane.get_x_length();
                         }
                         led_pane.set_color_HSV(x_pos, y_pos, led_pane.get_matrix()->get_value(x_pos, y_pos) * interpolation_part, 255, 255);
                     }
@@ -133,8 +120,79 @@ void Color_Effects::rainbow_lane(Matrix_api &led_pane, unsigned int lane_length 
 }
 
 //TODO: delay ersetzen durch millis
-//TODO: für beliebig lange strecke implementieren
-//TODO: macht das gleiche wie rainbow lane, nur mit eigener farbe
 void Color_Effects::color_lane(Matrix_api &led_pane, unsigned int red = 255, unsigned int green = 255, unsigned int blue = 255, unsigned int white = 255, unsigned int length = 1, unsigned int velocity = 100)
 {
+    bool left = true;
+
+    if (lane_length >= length)
+        lane_length = length;
+
+    while (!interrupt_effect())
+    {
+        for (int y = 0; y < led_pane.get_y_length(); ++y)
+        {
+            //calculate x and y pos of the individual lights
+            unsigned int x_pos = 0;
+            unsigned int y_pos = 0;
+            unsigned int y_shift = 0; //y_shift calculates the distance from the curr led y-pos to the first led y_pos
+            if (left)
+            {
+                
+                for (int x = 0; x < led_pane.get_x_length(); ++x)
+                {
+                    for (int curr = led_pane.get_x_length() - 1 - x; curr < led_pane.get_x_length() - 1 - x + lane_length; ++curr)
+                    {
+                        y_shift = (x + curr) / led_pane.get_x_length();
+                        //calculate y_pos
+                        y_pos = (y - y_shift) % led_pane.get_y_length();
+                        //calculate x_pos
+                        if (y_shift % 2 == 0)
+                        {
+                            x_pos = (x + curr) % led_pane.get_x_length(); 
+                        }
+                        else
+                        {
+                            x_pos = (led_pane.get_x_length() - 1) - ((x + curr) % led_pane.get_x_length());
+                        }
+                        led_pane.set_color(x_pos, y_pos, red, green, blue, white);
+                    }
+                    led_pane.render();
+                    delay(velocity);
+                    led_pane.clear();
+                }
+                left = !left;
+            }
+            else
+            {
+                for (int x = 0; x < led_pane.get_x_length(); ++x)
+                {
+                    //if lane_length isnt converted to int, the solution from x-lane_length will be unsigned and therefore never smaller than 0
+                    for (int curr = x; curr > x - (int)lane_length; --curr)
+                    {
+                        y_shift = ((x - curr) - (led_pane.get_x_length() - 1)));
+                        y_pos = (y - y_shift) % led_pane.get_y_length();
+                        if (y_shift % 2 == 0)
+                        {
+                            x_pos = (x - curr) % led_pane.get_x_length();
+                        }
+                        else
+                        {
+                            x_pos = (led_pane.get_x_length() - 1) - (x - curr) % led_pane.get_x_length();
+                        }
+                        led_pane.set_color(x_pos, y_pos, red, green, blue, white);
+                    }
+                    led_pane.render();
+                    delay(velocity);
+                    led_pane.clear();
+                }
+                left = !left;
+            }
+        }
+    }
+}
+
+void Color_Effects::drops(Matrix_api &led_pane, unsigned int length = 5, unsigned int red = 0, unsigned int green = 255, unsigned int blue = 0, unsigned int vel = 100){
+    while(!interrupt_effect()){
+        
+    }
 }
