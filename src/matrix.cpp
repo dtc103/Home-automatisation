@@ -135,7 +135,7 @@ Matrix operator+(Matrix& other){
     if(other.get_x_length() != this->get_x_length() || other.get_y_length() != this->get_y_length()){
         //TODO DO SOME ERROR HANDLIHNG HERE
     }
-    Matrix new_matrix(this->get_x_length(), this->get_y_length())
+    Matrix new_matrix(this->get_x_length(), this->get_y_length());
 
     for(size_t y = 0; y < this->get_y_length(); ++y){
         for(size_t x = 0; x < this->get_x_length(); ++x){
@@ -150,7 +150,7 @@ Matrix operator-(Matrix& other){
     if(other.get_x_length() != this->get_x_length() || other.get_y_length() != this->get_y_length()){
         //TODO DO SOME ERROR HANDLIHNG HERE
     }
-    Matrix new_matrix(this->get_x_length(), this->get_y_length())
+    Matrix new_matrix(this->get_x_length(), this->get_y_length());
 
     for(size_t y = 0; y < this->get_y_length(); ++y){
         for(size_t x = 0; x < this->get_x_length(); ++x){
@@ -165,7 +165,7 @@ Matrix operator*(Matrix& other){
     if(other.get_x_length() != this->get_x_length() || other.get_y_length() != this->get_y_length()){
         //TODO DO SOME ERROR HANDLIHNG HERE
     }
-    Matrix new_matrix(this->get_x_length(), this->get_y_length())
+    Matrix new_matrix(this->get_x_length(), this->get_y_length());
 
     for(size_t y = 0; y < this->get_y_length(); ++y){
         for(size_t x = 0; x < this->get_x_length(); ++x){
