@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 
+extern int g_error_flag;
+
 class Matrix
 {
 public:
@@ -18,6 +20,10 @@ public:
     size_t *get_pointer_to_value(size_t, size_t) const;
     void set_value(size_t, size_t, size_t);
 
+    Matrix mat_mult(Matrix&);
+    Matrix operator+(Matrix&);
+    Matrix operator-(Matrix&);
+    Matrix operator*(Matrix&);
 private:
     size_t y_length;
     size_t x_length;
