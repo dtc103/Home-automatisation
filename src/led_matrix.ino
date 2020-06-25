@@ -18,9 +18,6 @@ void setup()
 void loop()
 {
     //Color_Effects::strobe(matrix, 255, 255, 255, 255, 200);
-<<<<<<< HEAD
     Color_Effects::strobe(matrix, 12, 141, 245, 255, 100);
-=======
     //Color_Effects::rainbow_lane(matrix, 5, 50);
->>>>>>> 7023c896ca7d02bccc3c44a3027e6868e64c40d0
 }
