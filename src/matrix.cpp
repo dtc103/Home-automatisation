@@ -111,3 +111,67 @@ void Matrix::set_value(size_t val, size_t x, size_t y)
 {
     matrix[(y * x_length) + x] = val;
 }
+
+Matrix mat_mult(Matrix& other){
+    //check if matrix multiplikation is even possible
+    if(other.get_y_length() != this->get_x_length()){
+        //TODO DO SOME ERROR HANDLING HERE
+    }
+    Matrix new_matrix(this->get_y_length(), other.get_y_length());
+
+    for(size_t y = 0; y < new_matrix.get_y_length(); ++y){
+        for(size_t x = 0; y < new_matrix.get_x_length(); ++x){
+            size_t sum = 0;
+            for(size_t i = 0; i < new_matrix.get_x_length(); ++i){
+                sum += this->get_value(i, y) * other.get_value(x, i);
+            }
+            new_matrix.set_value(sum, x, y);
+        }
+    }
+    return new_matrix;
+}
+
+Matrix operator+(Matrix& other){
+    if(other.get_x_length() != this->get_x_length() || other.get_y_length() != this->get_y_length()){
+        //TODO DO SOME ERROR HANDLIHNG HERE
+    }
+    Matrix new_matrix(this->get_x_length(), this->get_y_length());
+
+    for(size_t y = 0; y < this->get_y_length(); ++y){
+        for(size_t x = 0; x < this->get_x_length(); ++x){
+            new_matrix(x, y) = this->get_value(x, y) + other.get_value(x, y);
+        }
+    }
+
+    return new_matrix;
+}
+
+Matrix operator-(Matrix& other){
+    if(other.get_x_length() != this->get_x_length() || other.get_y_length() != this->get_y_length()){
+        //TODO DO SOME ERROR HANDLIHNG HERE
+    }
+    Matrix new_matrix(this->get_x_length(), this->get_y_length());
+
+    for(size_t y = 0; y < this->get_y_length(); ++y){
+        for(size_t x = 0; x < this->get_x_length(); ++x){
+            new_matrix(x, y) = this->get_value(x, y) - other.get_value(x, y);
+        }
+    }
+
+    return new_matrix;
+}
+
+Matrix operator*(Matrix& other){
+    if(other.get_x_length() != this->get_x_length() || other.get_y_length() != this->get_y_length()){
+        //TODO DO SOME ERROR HANDLIHNG HERE
+    }
+    Matrix new_matrix(this->get_x_length(), this->get_y_length());
+
+    for(size_t y = 0; y < this->get_y_length(); ++y){
+        for(size_t x = 0; x < this->get_x_length(); ++x){
+            new_matrix(x, y) = this->get_value(x, y) * other.get_value(x, y);
+        }
+    }
+
+    return new_matrix;
+}
