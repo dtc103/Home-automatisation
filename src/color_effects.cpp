@@ -46,6 +46,8 @@ void Color_Effects::strobe(Matrix_api &led_pane, unsigned int red, unsigned int 
 //TODO: delay ersetzen durch millis
 void Color_Effects::rainbow_lane(Matrix_api &led_pane, unsigned int lane_length = 1, unsigned int velocity = 100)
 {
+    velocity = 100;
+
     const unsigned int max_hue = 65535;
     const unsigned int length = led_pane.get_x_length() * led_pane.get_y_length();
     const float interpolation_part = (1.0f / (float)(length - 1)) * max_hue;
@@ -60,19 +62,29 @@ void Color_Effects::rainbow_lane(Matrix_api &led_pane, unsigned int lane_length 
         for (int y = 0; y < led_pane.get_y_length(); ++y)
         {
             //calculate x and y pos of the individual lights
-            unsigned int x_pos = 0;
-            unsigned int y_pos = 0;
-            unsigned int y_shift = 0; //y_shift calculates the distance from the curr led y-pos to the first led y_pos
+            int x_pos = 0;
+            int y_pos = 0;
+            int y_shift = 0; //y_shift calculates the distance from the curr led y-pos to the first led y_pos
             if (left)
             {
 
                 for (int x = led_pane.get_x_length() - 1; x >= 0; --x)
                 {
-                    for (int curr = 0; curr < (int)lane_length; ++curr)
+                    for (int curr = 0; curr < lane_length; ++curr)
                     {
                         y_shift = (x + curr) / led_pane.get_x_length();
                         //calculate y_pos
-                        y_pos = (y - y_shift) % led_pane.get_y_length();
+                        y_pos = ((y - y_shift) + led_pane.get_y_length()) % led_pane.get_y_length(); //I have to add led_pane.get_y_length to prevent the modulo to be
+                        // Serial.print("x: ");
+                        // Serial.println(x);
+                        // Serial.print("curr: ");
+                        // Serial.println(curr);
+                        // Serial.print("y: ");
+                        // Serial.println(y);
+                        // Serial.print("y_shift: ");
+                        // Serial.println(y_shift);
+                        // Serial.print("y_pos: ");
+                        // Serial.println(y_pos);
                         //calculate x_pos
                         if (y_shift % 2 == 0)
                         {
@@ -95,10 +107,10 @@ void Color_Effects::rainbow_lane(Matrix_api &led_pane, unsigned int lane_length 
                 for (int x = 0; x < led_pane.get_x_length(); ++x)
                 {
                     //if lane_length isnt converted to int, the solution from x-lane_length will be unsigned and therefore never smaller than 0
-                    for (int curr = x; curr < (int)lane_length; ++curr)
+                    for (int curr = 0; curr < lane_length; ++curr)
                     {
                         y_shift = abs((x - curr - (led_pane.get_x_length() - 1)) / led_pane.get_x_length());
-                        y_pos = (y - y_shift) % led_pane.get_y_length();
+                        y_pos = ((y - y_shift) + led_pane.get_y_length()) % led_pane.get_y_length();
                         if (y_shift % 2 == 0)
                         {
                             x_pos = (x - curr) % led_pane.get_x_length();
