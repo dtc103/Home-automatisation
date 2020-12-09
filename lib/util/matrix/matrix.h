@@ -3,8 +3,6 @@
 
 #include <Arduino.h>
 
-extern int g_error_flag;
-
 class Matrix
 {
 public:
@@ -16,8 +14,9 @@ public:
 
     void fill(size_t);
 
-    size_t &get_value(size_t, size_t) const;
-    size_t *get_pointer_to_value(size_t, size_t) const;
+    size_t get_value(size_t, size_t) const;
+    size_t &get_value_ref(size_t, size_t);
+    const size_t *get_pointer_to_value(size_t, size_t);
     void set_value(size_t, size_t, size_t);
 
     Matrix mat_mult(Matrix&);
