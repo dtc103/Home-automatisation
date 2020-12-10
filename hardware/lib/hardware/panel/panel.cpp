@@ -64,7 +64,7 @@ const Matrix *Panel::get_matrix()
 }
 
 //has to be called in setup loop
-void Panel::init()
+void Panel::begin()
 {
     led_matrix = Adafruit_NeoPixel(x_length * y_length, pin, NEO_GRB + NEO_KHZ800);
     

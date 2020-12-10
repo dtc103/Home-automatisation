@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 #include <matrix/matrix.h>
-//#include "../effects/colors/colors.h"
 
 class Panel
 {
@@ -18,7 +17,7 @@ public:
     size_t get_y_length() const;
     const Matrix *get_matrix();
 
-    void init();
+    void begin();
     void render();
     void clear();
 
