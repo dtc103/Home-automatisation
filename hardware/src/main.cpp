@@ -1,13 +1,23 @@
 #include <Arduino.h>
+#include <WiFi.h>
 #include <panel/panel.h>
-#include <matrix/matrix.h>
-Panel p(2, 10, 10);
+#include <panel/effects/color_effects/color_effects.h>
+
+const char* ssid = "FRITZ!Box 6490 Cable";
+const char* password = "97445628199902922569";
+
+const char* host = "192.168.178.20";
+const int port = 3000;
+
+Panel p(13, 12, 20);
+
 void setup() {
   // put your setup code here, to run once:
-  p.init();
+    p.begin();
+    p.clear();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+    Color_Effects::fill(p, 255, 255, 255);
 }

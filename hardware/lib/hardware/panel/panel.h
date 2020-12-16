@@ -1,5 +1,5 @@
 #ifndef PANEL_H
-#define PANLE_H
+#define PANEL_H
 
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>

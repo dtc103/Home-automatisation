@@ -38,12 +38,12 @@ Panel::Panel(int data_pin, size_t x, size_t y)
 
 }
 
-void Panel::set_color(size_t x, size_t y, uint8_t red = 0, uint8_t green = 0, uint8_t blue = 0, uint8_t white = 255)
+void Panel::set_color(size_t x, size_t y, uint8_t red, uint8_t green, uint8_t blue, uint8_t white)
 {
     led_matrix.setPixelColor(matrix.get_value(x, y), red, green, blue, white);
 }
 
-void Panel::set_color_HSV(size_t x, size_t y, uint16_t hue = 0, uint8_t saturation = 0, uint8_t value = 0)
+void Panel::set_color_HSV(size_t x, size_t y, uint16_t hue, uint8_t saturation, uint8_t value)
 {
     led_matrix.setPixelColor(matrix.get_value(x, y), led_matrix.gamma32(led_matrix.ColorHSV(hue, saturation, value)));
 }

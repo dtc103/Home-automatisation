@@ -24,8 +24,8 @@ public:
     Matrix operator-(Matrix&);
     Matrix operator*(Matrix&);
 private:
-    size_t y_length;
     size_t x_length;
+    size_t y_length;
 
     size_t *matrix;
 };

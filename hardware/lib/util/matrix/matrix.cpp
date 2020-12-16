@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-Matrix::Matrix(size_t x = 1, size_t y = 1) : x_length{x}, y_length{y}
+Matrix::Matrix(size_t x, size_t y) : x_length{x}, y_length{y}
 {
     matrix = new size_t[x_length * y_length]();
 }
