@@ -9,7 +9,7 @@ const char* password = "97445628199902922569";
 const char* host = "192.168.178.20";
 const int port = 3000;
 
-Panel p(13, 12, 20);
+Panel p(2, 12, 20);
 
 void setup() {
   // put your setup code here, to run once:
@@ -19,5 +19,5 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-    Color_Effects::fill(p, 255, 255, 255);
+    Color_Effects::drops(p);
 }
