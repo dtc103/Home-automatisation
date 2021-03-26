@@ -1,7 +1,7 @@
 #include "color_effects.h"
 
 
-void Color_Effects::fill(Panel &led_panel, unsigned int red, unsigned int green, unsigned int blue, unsigned int white)
+void Color_Effects_Static::fill(Panel &led_panel, unsigned int red, unsigned int green, unsigned int blue, unsigned int white)
 {
     for (size_t i = 0; i < led_panel.get_y_length(); ++i)
     {
@@ -14,7 +14,7 @@ void Color_Effects::fill(Panel &led_panel, unsigned int red, unsigned int green,
 }
 
 //FIXME: strobe stops after a certain amount of time
-void Color_Effects::strobe(Panel &led_panel, unsigned int red, unsigned int green, unsigned int blue, unsigned int max_brightness, unsigned int max_strobe_time)
+void Color_Effects_Dynamic::strobe(Panel &led_panel, unsigned int red, unsigned int green, unsigned int blue, unsigned int max_brightness, unsigned int max_strobe_time)
 {
     int start_time = millis();
     bool lights_on = false;
@@ -43,7 +43,7 @@ void Color_Effects::strobe(Panel &led_panel, unsigned int red, unsigned int gree
 }
 
 //TODO: delay ersetzen durch millis
-void Color_Effects::rainbow_lane(Panel &led_panel, unsigned int lane_length, unsigned int velocity)
+void Color_Effects_Dynamic::rainbow_lane(Panel &led_panel, unsigned int lane_length, unsigned int velocity)
 {
     const unsigned int max_hue = 65535;
     const unsigned int length = led_panel.get_x_length() * led_panel.get_y_length();
@@ -118,7 +118,7 @@ void Color_Effects::rainbow_lane(Panel &led_panel, unsigned int lane_length, uns
 }
 
 //TODO: delay ersetzen durch millis
-void Color_Effects::color_lane(Panel &led_panel, unsigned int lane_length, unsigned int red, unsigned int green, unsigned int blue, unsigned int white, unsigned int velocity)
+void Color_Effects_Dynamic::color_lane(Panel &led_panel, unsigned int lane_length, unsigned int red, unsigned int green, unsigned int blue, unsigned int white, unsigned int velocity)
 {
     const unsigned int max_length = led_panel.get_x_length() * led_panel.get_y_length();
     bool left = true;
@@ -192,7 +192,7 @@ void Color_Effects::color_lane(Panel &led_panel, unsigned int lane_length, unsig
 
 }
 
-void Color_Effects::drops(Panel &led_panel, unsigned int length, unsigned int red, unsigned int green, unsigned int blue, unsigned int density, unsigned int vel)
+void Color_Effects_Dynamic::drops(Panel &led_panel, unsigned int length, unsigned int red, unsigned int green, unsigned int blue, unsigned int density, unsigned int vel)
 {
     int *drops[density];
     for(int i = 0; i < density; ++i){
