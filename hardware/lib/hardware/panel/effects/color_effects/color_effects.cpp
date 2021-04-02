@@ -35,7 +35,7 @@ void Color_Effects_Dynamic::strobe(Panel &led_panel, unsigned int red, unsigned 
         }
         else
         {
-            fill(led_panel, red, green, blue, max_brightness);
+            Color_Effects_Static::fill(led_panel, red, green, blue, max_brightness);
             lights_on = true;
         }
     }
