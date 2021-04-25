@@ -2,7 +2,7 @@
 #define SNAKE_H
 
 #include "Arduino.h"
-#include "../LED_Matrix/matrix.h"
+#include <Matrix.h>
 
 volatile int direction = 0;
 volatile bool pause = false;
@@ -26,7 +26,7 @@ public:
     int *get_apple_coords();
 
 private:
-    Matrix<int> playground;
+    Matrix playground;
 
     const unsigned int starting_size = 3;
     unsigned int snake_size;

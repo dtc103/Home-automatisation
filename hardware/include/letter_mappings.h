@@ -97,9 +97,3 @@
 #define BAR                     0x222220
 #define RIGHT_CURLY_BRACKET     0x623260
 #define TILDE                   0x5a0000
-
-
-
-
-
-

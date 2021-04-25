@@ -1,4 +1,4 @@
-#include "panel.h"
+#include "Panel.h"
 
 Panel::Panel(int data_pin, size_t x, size_t y)
     : x_length{x}, y_length{y}, pin{data_pin}

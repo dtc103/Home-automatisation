@@ -1,4 +1,4 @@
-#include "strip.h"
+#include "Strip.h"
 
 strip::strip(unsigned int data_pin, unsigned int led_count) : _data_pin{data_pin}, _led_count(led_count){
     _strip = Adafruit_NeoPixel(_led_count, _data_pin, NEO_GRB + NEO_KHZ800);

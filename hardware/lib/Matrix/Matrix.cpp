@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "Matrix.h"
 
 Matrix::Matrix(size_t x, size_t y) : x_length{x}, y_length{y}
 {
