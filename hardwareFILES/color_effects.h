@@ -1,9 +1,31 @@
-#ifndef COLOR_EFFECTS_H
+ifndef COLOR_EFFECTS_H
 #define COLOR_EFFECTS_H
 
-#include <panel/panel.h>
+#include <panel.h>
 #include <random>
 #include <vector>
+
+class Effect{
+public:
+    void start(){
+        this->running = true;
+    }
+    void stop(){
+        this->running = false;
+    }
+private:
+    bool running = false;
+}
+
+class Panel_Effect: public Effect{
+public:
+    Panel_Effect()
+
+}
+
+class Strip_Effect: public Effect{
+
+}
 
 struct Color_Effects_Static
 {

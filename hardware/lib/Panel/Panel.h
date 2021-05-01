@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
-#include <matrix/matrix.h>
+#include <Matrix.h>
 
 class Panel
 {

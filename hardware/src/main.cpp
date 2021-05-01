@@ -1,32 +1,26 @@
 #include <Arduino.h>
 #include <Matrix.h>
+#include <Adafruit_NeoPixel.h>
+#include <color_effects.h>
 
-Matrix matrix(20000, 20000);
 
-//TaskHandle_t Task1;
-//void Task1Code(void *parameter);
+Panel p(2, 12, 20);
+Panel_Effect pe(p);
+
+void interrupt_handler(){
+	
+	
+}
 
 void setup() {
-	Serial.begin(115200);
-  	// put your setup code here, to run once:
-	/*
-	xTaskCreatePinnedToCore(
-		Task1Code,
-		"Task1",
-		10000,
-		NULL,
-		0,
-		&Task1,
-		1
-	);*/
+	attachInterrupt(digitalPinToInterrupt(2), interrupt_handler, RISING);
+	Serial.begin(9600);
+	pe.begin();
+	pe.start();
 }
 
 void loop() {
-  	// put your main code here, to run repeatedly:
-	//Serial.print(xPortGetCoreID());
-	Serial.println("----------------------------------------------------------------------------------------------------------------------------------------");
-}
-
-void Task1Code(void *parameter){
-	//Serial.print(xPortGetCoreID());
+	Serial.println(pe.is_running());
+	Serial.print("asdf");
+	delay(500);
 }

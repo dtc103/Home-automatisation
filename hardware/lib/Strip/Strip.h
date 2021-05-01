@@ -10,7 +10,6 @@ public:
 
     unsigned int get_led_count() const;
 
-    void set_led(unsigned int);
     void set_led(unsigned int, unsigned int, unsigned int, unsigned int);
     void set_led(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
