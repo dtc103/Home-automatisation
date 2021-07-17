@@ -4,15 +4,13 @@ use std::io::prelude::*;
 use pickledb::{PickleDb, PickleDbDumpPolicy};
 use regex::Regex;
 
-use crate::check_mac;
-
 pub struct MACAddress{
     address: String,
 }
 
 impl MACAddress{    
     pub fn new(mac: String) -> Result<Option<MACAddress>, MacParseError>{
-        match check_mac(mac){
+        match Self::check_mac(&mac){
             Ok(is_database) => {
                 if is_database{
                     return Ok(Some(MACAddress{address: mac}))
@@ -20,11 +18,13 @@ impl MACAddress{
                     return Ok(None)
                 }
             }
-            _ => print!("yes")
-        }   
+            Err(e) => Err(e)
+        }
     }
 
-    pub fn check_mac(mac_address: &String) -> Result<bool, MacParseError>{
+    //first checks if the mac address is in the correct format
+    //then returns if the mac address is already in the database
+    fn check_mac(mac_address: &String) -> Result<bool, MacParseError>{
         let mac_regex = Regex::new(r"^([0-9a-fA-F]{2}::){5}[0-9a-fA-F]{2}$").unwrap();
         if !mac_regex.is_match(mac_address){
             return Err(MacParseError);
@@ -52,26 +52,4 @@ impl fmt::Display for MacParseError{
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result{
         write!(f, "Mac Address parser error: Wasn't able to extract MAC address. A MAC address has to be in the format: xx::xx::xx::xx:xx::xx")
     }
-}
-
-pub struct DeviceServer{
-    pub listener: TcpListener,
-}
-
-impl DeviceServer{
-    pub fn new<A>(addr: A) -> Self where A:ToSocketAddrs{
-        DeviceServer{
-            listener: TcpListener::bind(addr).expect("Failed while creating socket"),
-        }
-    }
-
-    pub fn start_server(&self){
-        for stream in self.listener.incoming(){
-            let stream = stream.unwrap();
-            std::thread::spawn(|| {
-                
-            });
-        }
-    }
-    
 }

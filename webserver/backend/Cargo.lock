@@ -70,17 +70,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cdb031dd78e28731d87d56cc8ffef4a8f36ca26c38fe2de700543e627f8a464a"
 
 [[package]]
-name = "backend"
-version = "0.1.0"
-dependencies = [
- "pickledb",
- "regex",
- "rocket",
- "rocket_dyn_templates",
- "serde",
-]
-
-[[package]]
 name = "base-x"
 version = "0.2.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1313,7 +1302,6 @@ dependencies = [
  "rocket_codegen",
  "rocket_http",
  "serde",
- "serde_json",
  "state",
  "tempfile",
  "time",
@@ -2014,6 +2002,17 @@ name = "wasm-bindgen-shared"
 version = "0.2.74"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d7cff876b8f18eed75a66cf49b65e7f967cb354a7aa16003fb55dbfd25b44b4f"
+
+[[package]]
+name = "webserver"
+version = "0.1.0"
+dependencies = [
+ "pickledb",
+ "regex",
+ "rocket",
+ "rocket_dyn_templates",
+ "serde",
+]
 
 [[package]]
 name = "winapi"
