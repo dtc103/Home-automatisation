@@ -4,6 +4,42 @@ use std::io::prelude::*;
 use pickledb::{PickleDb, PickleDbDumpPolicy};
 use regex::Regex;
 
+use crate::check_mac;
+
+pub struct MACAddress{
+    address: String,
+}
+
+impl MACAddress{    
+    pub fn new(mac: String) -> Result<Option<MACAddress>, MacParseError>{
+        match check_mac(mac){
+            Ok(is_database) => {
+                if is_database{
+                    return Ok(Some(MACAddress{address: mac}))
+                }else{
+                    return Ok(None)
+                }
+            }
+            _ => print!("yes")
+        }   
+    }
+
+    pub fn check_mac(mac_address: &String) -> Result<bool, MacParseError>{
+        let mac_regex = Regex::new(r"^([0-9a-fA-F]{2}::){5}[0-9a-fA-F]{2}$").unwrap();
+        if !mac_regex.is_match(mac_address){
+            return Err(MacParseError);
+        }
+
+        let db_path = "mac.db";
+
+        let db = match PickleDb::load_json(db_path, PickleDbDumpPolicy::NeverDump){
+            Ok(db) => db,
+            Err(_) => PickleDb::new_json(db_path, PickleDbDumpPolicy::NeverDump)
+        };
+
+        Ok(db.exists(mac_address.as_str()))
+    }
+}
 
 pub struct MacParseError;
 
@@ -33,28 +69,9 @@ impl DeviceServer{
         for stream in self.listener.incoming(){
             let stream = stream.unwrap();
             std::thread::spawn(|| {
-                Self::handle_connection(stream);
+                
             });
         }
     }
-
-    fn handle_connection(mut stream: TcpStream){
-        
-    }
-
-    fn check_mac(mac_address: String) -> Result<bool, MacParseError>{
-        let mac_regex = Regex::new(r"^([0-9a-fA-F]{2}::){5}[0-9a-fA-F]{2}$").unwrap();
-        if !mac_regex.is_match(mac_address.as_str()){
-            return Err(MacParseError);
-        }
-
-        let db_path = "mac.db";
-
-        let db = match PickleDb::load_json(db_path, PickleDbDumpPolicy::NeverDump){
-            Ok(db) => db,
-            Err(e) => PickleDb::new_json(db_path, PickleDbDumpPolicy::NeverDump)
-        };
-
-        Ok(db.exists(mac_address.as_str()))
-    }
+    
 }

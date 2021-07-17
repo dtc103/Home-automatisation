@@ -1,28 +1,61 @@
 #[macro_use] extern crate rocket;
 use rocket::serde::{Deserialize};
-use serde::
 
 use pickledb::{PickleDb, PickleDbDumpPolicy};
 
 use regex::Regex;
 
-#[derive(Deserialize)]
-struct MACAddress<'r>{
-    address: &'r str,
-}
+use rocket::http::{Status, ContentType};
+use rocket::response::{status, content};
+use rocket::serde::{json::Json, Serialize};
 
+use rocket::fs::{NamedFile, FileServer};
+
+mod serverUtils;
+use serverUtils::MACAddress;
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index])
+        .mount("/", routes![index, json])
         .mount("/hello", routes![])
+
+}
+
+#[post("/authentication", format = "application/json", data = "<mac>")]
+fn authentication(mac: String) -> Status{
+    match MACAddress::new(mac){
+        Ok(smac) => {
+
+            Status::Accepted
+        },
+        Err(e) => {
+            Status::BadRequest
+        }
+    }
 }
 
 #[get("/")]
-fn index() -> &'static str{
-    "Hello World"
+async fn index() -> Option<NamedFile>{
+    NamedFile::open("./../../website/index.html").await.ok()
 }
+
+#[get("/todo")]
+fn json() -> Json<TestForJSON>{
+    Json(TestForJSON{
+        elem1: 14,
+        elem2: 5,
+        elem3: "frick"
+    })
+}
+
+#[derive(Serialize)]
+struct TestForJSON{
+    elem1 : i32,
+    elem2 : i32,
+    elem3 : &'static str,
+}
+
 /*
 #[post("/users", format="application/json", data="<user>")]
 fn world(user: Json) -> &'static str{
