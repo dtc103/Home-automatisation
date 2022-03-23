@@ -15,17 +15,10 @@ public:
 
     size_t get_x_length() const;
     size_t get_y_length() const;
-    const Matrix *get_matrix();
 
     void begin();
     void render();
     void clear();
-    void is_running();
-
-    class Effects{
-        public:
-        void test();
-    };
 
 private:
     Matrix matrix;
@@ -33,7 +26,6 @@ private:
     size_t x_length;
     size_t y_length;
     uint16_t pin;
-    bool is_running;
 };
 
 #endif

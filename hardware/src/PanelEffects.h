@@ -1,5 +1,5 @@
-// #ifndef COLOR_EFFECTS_H
-// #define COLOR_EFFECTS_H
+// #ifndef PANEL_EFFECTS_H
+// #define PANEL_EFFECTS_H
 
 // #include <Panel.h>
 

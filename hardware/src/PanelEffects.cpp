@@ -1,4 +1,4 @@
-#include "color_effects.h"
+#include "PanelEffects.h"
 /*
 //TODO: delay ersetzen durch millis
 void Color_Effects_Dynamic::rainbow_lane(Panel &led_panel, unsigned int lane_length, unsigned int velocity)

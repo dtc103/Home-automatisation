@@ -1,16 +1,18 @@
 #include <Arduino.h>
-//#include <Matrix.h>
-//#include <Adafruit_NeoPixel.h>
-//#include <color_effects.h>
+#include <PanelServer.h>
+#include <PanelDefinitions.h>
 
+PanelServer server(80);
+
+char ssid[] = "FRITZ!Box 6490 Cable";
+char pw[] = "97445628199902922569";
 
 void setup() {
-	pinMode(11, OUTPUT);
+    Serial.begin(9600);
+	server.begin(ssid, pw);
+    server.authenticate(ACCESS_POINT_NAME, ACCESS_POINT_PORT, DEVICE_NAME);
 }
 
 void loop() {
-	digitalWrite(GPIO_NUM_11, LOW);
-	delay(1000);
-	digitalWrite(GPIO_NUM_11, HIGH);
-	delay(1000);
+
 }

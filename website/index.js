@@ -4,3 +4,5 @@ var app3 = new Vue({
         seen: true
     }
 })
+
+app3.seen = false

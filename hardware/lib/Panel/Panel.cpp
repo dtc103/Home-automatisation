@@ -58,11 +58,6 @@ size_t Panel::get_y_length() const
     return matrix.get_y_length();
 }
 
-const Matrix *Panel::get_matrix()
-{
-    return &matrix;
-}
-
 //has to be called in setup loop
 void Panel::begin()
 {
