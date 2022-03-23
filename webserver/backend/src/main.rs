@@ -2,6 +2,8 @@
 
 use regex::Regex;
 
+use std::path::{Path, PathBuf};
+
 use rocket::Request;
 use rocket::response::Response;
 use rocket::http::Status;
@@ -17,14 +19,14 @@ use server_utils::database;
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index, authenticate])
-        .mount("/devices", routes![])
+        .mount("/", routes![index, indexfiles])
+        .mount("/authenticate", routes![authenticate])
 }
 
 /**
  * Authenticates new devices, which want to connect
  */
-#[post("/authenticate", format="application/json", data="<device>")]
+#[post("/", format="application/json", data="<device>")]
 async fn authenticate(device: Json<Device>) -> Status{
     let dev = match Device::new(device.devicename.clone(), device.mac.clone(), device.ip.clone(), device.port.clone()){
         Ok(d) => d,
@@ -46,10 +48,13 @@ async fn authenticate(device: Json<Device>) -> Status{
 }
 
 
-
-
-
 #[get("/")]
 async fn index() -> Option<NamedFile>{
-    NamedFile::open("./../../website/index.html").await.ok()
+    NamedFile::open("../websites/index/index.html").await.ok()
+}
+
+//this function is for returning all the corresponding javascript and css files
+#[get("/<file..>")]
+async fn indexfiles(file: PathBuf) -> Option<NamedFile>{
+    NamedFile::open(Path::new("../websites/index").join(file)).await.ok()
 }
