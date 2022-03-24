@@ -21,6 +21,7 @@ fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index, indexfiles])
         .mount("/authenticate", routes![authenticate])
+        .mount("/devices", routes![devicepath])
 }
 
 /**
@@ -57,4 +58,9 @@ async fn index() -> Option<NamedFile>{
 #[get("/<file..>")]
 async fn indexfiles(file: PathBuf) -> Option<NamedFile>{
     NamedFile::open(Path::new("../websites/index").join(file)).await.ok()
+}
+
+#[get("/<device>")]
+async fn devicepath(device: &str) -> Option<NamedFile>{
+    NamedFile::open(Path::new("../websites/devices").join(device)).await.ok()
 }

@@ -5,7 +5,7 @@
 PanelServer server(80);
 
 char ssid[] = "devicenetwork";
-char pw[] = "923492760463546739763524";
+char pw[] = "6C-ji40a";
 
 void setup() {
     Serial.begin(9600);

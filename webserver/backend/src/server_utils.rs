@@ -49,6 +49,7 @@ pub mod database{
     const DB_PATH: &str = "devices.db";
 
     //TODO later: check inside a file, if a mac address or device name is allowed to connect to the server
+    //TODO save hash of values, isntead clear text
     const _AUTHORIZED_DEVICES_PATH: &str = "authorized_devices.txt";
 
     pub fn open_database() -> PickleDb{
