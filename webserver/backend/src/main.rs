@@ -21,7 +21,9 @@ fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index, indexfiles])
         .mount("/authenticate", routes![authenticate])
-        .mount("/devices", routes![devicepath])
+        .mount("/devices", routes![device])
+        .mount("/commands", routes![command])
+        
 }
 
 /**
@@ -53,14 +55,22 @@ async fn authenticate(device: Json<Device>) -> Status{
 async fn index() -> Option<NamedFile>{
     NamedFile::open("../websites/index/index.html").await.ok()
 }
-
 //this function is for returning all the corresponding javascript and css files
-#[get("/<file..>")]
-async fn indexfiles(file: PathBuf) -> Option<NamedFile>{
-    NamedFile::open(Path::new("../websites/index").join(file)).await.ok()
+#[get("/index/<files..>")]
+async fn indexfiles(files: PathBuf) -> Option<NamedFile>{
+    NamedFile::open(Path::new("../websites/index/").join(files)).await.ok()
 }
 
-#[get("/<device>")]
-async fn devicepath(device: &str) -> Option<NamedFile>{
-    NamedFile::open(Path::new("../websites/devices").join(device)).await.ok()
+#[get("/<device>/<devicefiles..>")]
+async fn device(device: &str, devicefiles: PathBuf) -> Option<NamedFile>{
+    if devicefiles.as_os_str().is_empty(){
+        NamedFile::open(Path::new(&format!("../websites/devices/{}/{}.html", device, device))).await.ok()
+    }else{
+        NamedFile::open(Path::new("../websites/devices").join(device).join(devicefiles)).await.ok()
+    }
+}
+
+#[get("/<device>/<command>")]
+async fn command(device: &str, command: &str) -> String{
+    format!("device: {}, command: {}", device, command)
 }
